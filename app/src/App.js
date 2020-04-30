@@ -36,35 +36,6 @@ function App() {
     </main>
   );
 }
-/*
-/// Demo store usage
-function Child() {
-  const store = React.useContext(Ctx);
-  const counter = store.use(() => store.get("counter"));
-
-  return (
-    <div>
-      Clicks: <strong>{counter}</strong>,{" "}
-      <button onClick={() => store.set("counter", store.get("counter") + 1)}>
-        Increment
-      </button>
-    </div>
-  );
-}
-function Child2() {
-  const store = React.useContext(Ctx);
-  const counter = store.use(() => store.get("counter2"));
-
-  return (
-    <div>
-      Clicks: <strong>{counter}</strong>,{" "}
-      <button onClick={() => store.set("counter2", store.get("counter2") + 1)}>
-        Increment
-      </button>
-    </div>
-  );
-}
-*/
 
 /// A single-type event emitter (.on(handler) instead of .on(eventName, handler))
 class EventType {

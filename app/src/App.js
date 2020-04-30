@@ -11,6 +11,10 @@ function App() {
     s.set("heartConnected", false);
     s.set("cadenceConnected", false);
 
+    s.set("powerData", []);
+    s.set("heartData", []);
+    s.set("cadenceData", []);
+
     // player context
     const storedData = JSON.parse(localStorage.getItem('cat6') || "{}");
     s.set("playerName", storedData.name || "Vance Legstrong");

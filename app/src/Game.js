@@ -3,7 +3,8 @@ import Logo from './components/Logo';
 import Ctx from './Ctx';
 import WeightConversion from './components/WeightConversion';
 import { Lobby } from './components/Lobby';
-import { connect, devices } from './utils/bluetooth';
+import { connect, devices, addToArray } from './utils/bluetooth';
+import DeviceData from './components/DeviceData';
 
 const DONT_FORCE_POWERMETER = true;
 
@@ -14,8 +15,14 @@ function DeviceSelector({ type, name }) {
 
   const store = React.useContext(Ctx);
   const connected = store.use(() => store.get(connectedField));
+  const data = store.use(() => store.get(`${type}Data`));
+
   const setConnected = (value) => store.set(connectedField, value);
-  const setData = (data) => console.log('react got data', data);
+  const setData = (value) => {
+    const newData = addToArray(data, value);
+    store.set(`${type}Data`, newData);
+    console.log('react got data', data);
+  };
 
   return (
     <span className={`${type}Select`}>
@@ -84,7 +91,7 @@ function DeviceStatus({ type }) {
   const connected = store.use(() => store.get(connectedField));
 
   return (<>
-    <div className={`device-${connected ? 'connected' : 'unconnected'}`}>{name}</div>
+    <div className={`device-${connected ? 'connected' : 'unconnected'}`}>{name} {connected && <><DeviceData type={type}/> bpm</>}</div>
   </>)
 }
 

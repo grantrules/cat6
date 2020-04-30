@@ -97,6 +97,7 @@ export default function Room() {
 
   const store = React.useContext(Ctx);
   const gameState = store.use(() => store.get("gameState").gameState);
+
   return (<>
 
     {gameState === 'lobby' &&

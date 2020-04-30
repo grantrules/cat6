@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Logo from './components/Logo';
 import Ctx from './Ctx';
 import WeightConversion from './components/WeightConversion';
@@ -11,12 +11,12 @@ const DONT_FORCE_POWERMETER = true;
 
 function DeviceSelector({ type, name }) {
   const { connected: connectedField } = devices.get(type);
-  
+
   const store = React.useContext(Ctx);
   const connected = store.use(() => store.get(connectedField));
   const setConnected = (value) => store.set(connectedField, value);
   const setData = (data) => console.log('react got data', data);
-  
+
   return (
     <span className={`${type}Select`}>
       {!connected ?
@@ -47,10 +47,17 @@ function DeviceSelectScreen({ Next, powerRequiredError, connected }) {
 }
 
 function PlayerDetailScreen({ Next }) {
-  
+
   const store = React.useContext(Ctx);
   const name = store.use(() => store.get("playerName"));
   const { weight, isKg } = store.use(() => store.get("playerWeight"));
+
+  useEffect(() => {
+    return () => {
+      const data = { name, weight: { weight, isKg } };
+      localStorage.setItem('cat6', JSON.stringify(data));
+    }
+  }, [name, weight, isKg]);
 
   const update = ({ weight, isKg }) => {
     store.set('playerWeight', { weight, isKg });
@@ -71,10 +78,10 @@ function PlayerDetailScreen({ Next }) {
 }
 
 function DeviceStatus({ type }) {
-  
+
   const { connected: connectedField, name } = devices.get(type);
   const store = React.useContext(Ctx);
-  const connected  = store.use(() => store.get(connectedField));
+  const connected = store.use(() => store.get(connectedField));
 
   return (<>
     <div className={`device-${connected ? 'connected' : 'unconnected'}`}>{name}</div>
@@ -97,17 +104,17 @@ function NextButton({ onClick }) {
 function Game() {
 
   const [gameState, setGameState] = useState('device_select');
-  
+
   const [powerRequiredError, setPowerRequiredError] = useState(false);
 
   const isGameState = (state) => state === gameState;
 
   const NextBtn = ({ state }) => (<button onClick={() => setGameState(state)}>Next</button>)
 
-  
+
   const { connected: connectedField } = devices.get('power');
   const store = React.useContext(Ctx);
-  const powerConnected  = store.use(() => store.get(connectedField));
+  const powerConnected = store.use(() => store.get(connectedField));
 
 
   const checkPowerConnected = () => {
@@ -117,7 +124,7 @@ function Game() {
       setGameState('name_select');
     }
   }
-  
+
   console.log('rendering game...');
 
   return (
@@ -126,7 +133,7 @@ function Game() {
       <Logo />
 
       {isGameState('device_select') &&
-        <DeviceSelectScreen connected={powerConnected} powerRequiredError={powerRequiredError} Next={<NextBtn state="name_select"/>} />
+        <DeviceSelectScreen connected={powerConnected} powerRequiredError={powerRequiredError} Next={<NextBtn state="name_select" />} />
       }
 
       {isGameState('name_select') &&

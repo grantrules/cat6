@@ -77,7 +77,7 @@ exports.Room = class extends colyseus.Room {
     }
   }
   onDispose() {
-    this.presence.hdel("rooms", roomId);
+    this.presence.hdel("rooms", this.roomId);
   }
 
 }

@@ -2,7 +2,8 @@ import * as Colyseus from "colyseus.js";
 
 const connect = () => {
   console.log("Connecting...");
-  const client = new Colyseus.Client('ws://localhost:2567');
+  const host = window.location.port === 3000 ? 'localhost:2567' : window.location.host
+  const client = new Colyseus.Client(`ws://${host}` /* :2567' */);
   return client;
 }
 

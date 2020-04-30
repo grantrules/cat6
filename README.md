@@ -1,5 +1,5 @@
 # cat6
-Multiplayer game for cycling smart trainers.
+Multiplayer game for cycling smart trainers. Right now, this just connects a few BT devices in Chrome and has a multiplayer lobby. Game coming.. eventually.
 
 ### Description
 

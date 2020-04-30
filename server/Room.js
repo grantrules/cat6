@@ -9,7 +9,12 @@ const genId = nanoid.customAlphabet('1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ', 4);
 exports.Room = class extends colyseus.Room {
 
   onCreate(options) {
-    this.roomId = genId();
+    let roomId = genId();
+    while (this.presence.hget("rooms", roomId) === "1") {
+      roomId = genId();
+    }
+    this.presence.hset("rooms", roomId, "1");
+    this.roomId = roomId;
     this.maxClients = 4;
     this.onMessage("type", (client, message) => {
       this.broadcast(message);
@@ -72,6 +77,7 @@ exports.Room = class extends colyseus.Room {
     }
   }
   onDispose() {
+    this.presence.hdel("rooms", roomId);
   }
 
 }

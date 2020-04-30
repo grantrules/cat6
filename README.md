@@ -5,10 +5,11 @@ Multiplayer game for cycling smart trainers.
 
 Lets you select cycling bluetooth devices and create a private lobby for your friends.
 
-Build with:
-[React](https://github.com/facebook/react)
-[Colyseus](https://github.com/colyseus/colyseus)
-[Three.js](https://github.com/mrdoob/three.js) <-- maybe?
+Built with:
+
+* [React](https://github.com/facebook/react)
+* [Colyseus](https://github.com/colyseus/colyseus)
+* [Three.js](https://github.com/mrdoob/three.js) <-- maybe?
 
 
 ### Running

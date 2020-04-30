@@ -1,0 +1,63 @@
+:root {
+  --disabled: #012c03;
+  --error: #940000;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color:#000;
+  color:#008106;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  text-align: center;
+
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+button, h1, input, select, div {
+  font-family: 'Press Start 2P', cursive;
+}
+
+ul { list-style: none; padding: 0; margin: 0;}
+li { margin: 0; padding: 0; }
+
+button {
+  margin: 5px;
+  padding: 10px;
+  border: solid 4px #008106;
+  background-color: inherit;
+  color: #008106;
+}
+
+input {
+  padding: 5px;
+  margin: 5px;
+  background-color: inherit;
+  color: #008106;
+  border: 0;
+
+  border-bottom: solid 4px #008106;
+}
+
+.device-unconnected {
+  color: var(--disabled);
+}
+
+.disabled {
+  color: var(--disabled);
+}
+
+.large-input {
+  font-size: xxx-large;
+}
+
+.error {
+  color: var(--error);
+}

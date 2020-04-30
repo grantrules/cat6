@@ -1,0 +1,10 @@
+.playerList {
+  margin: 0 auto;
+  width: fit-content;
+  text-align: left;
+  margin-bottom: 15px;
+}
+
+.notready {
+  font-style: italic;
+}

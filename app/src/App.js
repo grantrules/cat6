@@ -13,7 +13,7 @@ function App() {
 
     // player context
     const storedData = JSON.parse(localStorage.getItem('cat6') || "{}");
-    s.set("playerName", storedData.name || "Vance Armstrong");
+    s.set("playerName", storedData.name || "Vance Legstrong");
     s.set("playerWeight", storedData.weight || { weight: 0, isKg: true });
 
     // game context

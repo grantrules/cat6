@@ -20,6 +20,8 @@ Use docker:
 
 (runs on port 8081)
 
+Otherwise, run `npm install` in app and server then:
+
 Start the server:
 
 `cd server && npm run start`

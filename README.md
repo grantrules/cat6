@@ -14,10 +14,20 @@ Built with:
 
 ### Running
 
+Use docker:
+
+`docker-compose up -d`
+
+(runs on port 8081)
+
 Start the server:
 
 `cd server && npm run start`
 
+(runs on 2567)
+
 Start the client:
 
 `cd app && npm run start`
+
+(runs on 3000)

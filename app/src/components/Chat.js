@@ -35,7 +35,7 @@ function ChatInput() {
   const [message, setMessage] = useState('');
 
   const send = () => {
-    if (joinedRoom) {
+    if (joinedRoom && message) {
       joinedRoom.send('chat', message);
       setMessage('');
     }

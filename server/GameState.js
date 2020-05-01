@@ -170,6 +170,7 @@ class GameState extends schema.Schema {
   playerRemove(id) {
     this.sendMessage('left', this.players[id].name);
     delete this.players[id];
+    delete this.playerData[id];
   }
 
   /*

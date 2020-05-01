@@ -2,8 +2,8 @@ import React from 'react';
 
 function WeightConversion({ name, weight, isKg, update }) {
 
-  const kgToLbs = (n) => n * 0.453592;
-  const lbsToKg = (n) => n * 1 / 0.453592;
+  const kgToLbs = (n) => n * 1 / 0.453592;
+  const lbsToKg = (n) => n * 0.453592;
   const radioChange = ({ weight, isKg }) => update({ weight, isKg });
 
   const onChange = ({ target: { value } }) => {

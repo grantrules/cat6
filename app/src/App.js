@@ -21,8 +21,6 @@ function App() {
     s.set("playerWeight", { weight: 0, isKg: true, ...(storedData.weight || {}) });
 
     // game context
-
-    // { client: null, room: null, host: false, connecting: false, state: {}, connected: false }
     s.set("gameClient", null);
     s.set("gameRoom", null);
     s.set("gameState", {});

@@ -26,6 +26,7 @@ function App() {
     s.set("gameClient", null);
     s.set("gameRoom", null);
     s.set("gameState", {});
+    s.set("gameChat", []);
     s.set("connecting", false);
     s.set("connected", false);
 

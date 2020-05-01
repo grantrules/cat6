@@ -50,13 +50,14 @@ class Player extends schema.Schema {
   constructor(
     playerId,
     name,
-    team = "",
+    weight,
     connected = true,
   ) {
     super();
     this.playerId = playerId;
     this.name = name;
-    this.team = team;
+    this.weight = weight;
+    this.team = "";
     this.connected = connected;
     this.ready = false;
     //this.color = team ? getTeamColor(team) : '#FFFFFF';
@@ -74,6 +75,7 @@ class Player extends schema.Schema {
 schema.defineTypes(Player, {
   playerId: "string",
   name: "string",
+  weight: "number",
   team: "string",
   connected: "boolean",
   ready: "boolean",
@@ -138,10 +140,11 @@ class GameState extends schema.Schema {
 
 
   // PLAYERS: single
-  playerAdd(id, name) {
+  playerAdd(id, name, weight) {
     const player = new Player(
       id,
       name || id,
+      weight,
     );
 
     const playerData = new PlayerData(id);

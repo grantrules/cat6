@@ -2,6 +2,7 @@ import React from 'react';
 import './Room.css';
 import Ctx from '../Ctx';
 import { Players } from './PlayerDetails';
+import { ChatRoom } from './Chat';
 
 function Countdown({ time }) {
   const [secs, setSecs] = React.useState(3)
@@ -52,6 +53,8 @@ function InGameLobby() {
       }</>
     }
     <Ready ready={ready} onClick={readyClick} />
+
+    <ChatRoom/>
 
   </>)
 }

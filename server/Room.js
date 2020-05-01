@@ -16,8 +16,10 @@ exports.Room = class extends colyseus.Room {
     this.presence.hset("rooms", roomId, "1");
     this.roomId = roomId;
     this.maxClients = 4;
-    this.onMessage("type", (client, message) => {
-      this.broadcast(message);
+    this.onMessage("chat", (client, message) => {
+      const msg = { from: this.state.players[client.id].name, time: new Date().getTime(), message };
+      console.log(`chat from ${msg.from}: ${msg.message}`);
+      this.broadcast('chat', msg);
     });
     this.onMessage('heart', (client,message) => {
       console.log(`got heart rate from ${client.id}: ${message} bpm`);
@@ -65,7 +67,7 @@ exports.Room = class extends colyseus.Room {
 
   onJoin(client, options) {
     console.log(`${options.playerName} joined`);
-    this.state.playerAdd(client.sessionId, options.playerName);
+    this.state.playerAdd(client.sessionId, options.playerName, options.playerWeight);
   }
 
   async onLeave(client, consented) {

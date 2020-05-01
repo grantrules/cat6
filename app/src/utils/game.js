@@ -11,9 +11,9 @@ const connect = () => {
 const client = connect();
 
 
-const join = (roomId, name, onStateChange, onMessage) => {
+const join = (roomId, name, weight, onStateChange, onMessage) => {
   const joinRoom = finishJoin(onStateChange, onMessage)
-  return client.joinById(roomId, { playerName: name })
+  return client.joinById(roomId, { playerName: name, playerWeight: weight })
     .then(room => { joinRoom(room); return room; })
     .catch((err) => {
       const error = err.message.indexOf("not found") ? "Room not found" : "Error joining room";
@@ -23,9 +23,9 @@ const join = (roomId, name, onStateChange, onMessage) => {
 
 let joinedRoom;
 
-const host = (name, onStateChange, onMessage) => {
+const host = (name, weight, onStateChange, onMessage) => {
   const joinRoom = finishJoin(onStateChange, onMessage)
-  return client.create('room', { playerName: name }).then(room => {
+  return client.create('room', { playerName: name, playerWeight: weight }).then(room => {
     console.log(room);
     joinRoom(room)
     return room;

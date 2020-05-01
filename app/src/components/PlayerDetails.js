@@ -11,27 +11,22 @@ function Device({ type, playerId }) {
 
   const store = React.useContext(Ctx);
   const maxType = max[type];
-  const value = store.use(()=>store.get('gameState').playerData[playerId][type]);
-  const maxValue = store.use(()=>store.get('gameState').playerData[playerId][maxType]);
+  const value = store.use(() => store.get('gameState').playerData[playerId][type]);
+  const maxValue = store.use(() => store.get('gameState').playerData[playerId][maxType]);
   return (<>{value}{unit[type]} / {maxValue}</>)
 }
 
 function PlayerData({ player }) {
-  
-  const store = React.useContext(Ctx);
-  
-
   return (<ul>
-    <li>HR: <Device type='heart' playerId={player.playerId}/></li>
-    <li>Pow: <Device type='power' playerId={player.playerId}/></li>
-    <li>Cad: <Device type='cadence' playerId={player.playerId}/></li>
+    <li>HR: <Device type='heart' playerId={player.playerId} /></li>
+    <li>Pow: <Device type='power' playerId={player.playerId} /></li>
+    <li>Cad: <Device type='cadence' playerId={player.playerId} /></li>
   </ul>)
 }
 
 function Players() {
-
   const store = React.useContext(Ctx);
-  const gamePlayers = store.use(()=>store.get('gameState').players);
+  const gamePlayers = store.use(() => store.get('gameState').players);
 
   let players = []
   for (let id in gamePlayers) {
@@ -39,13 +34,12 @@ function Players() {
     players.push(player)
   }
 
-    return (<ul>
-      {players.map(
-        (player, n) => (<li key={n}><Player player={player}/> <PlayerData player={player}/> </li>)
-        )}
-    </ul>)
+  return (<ul>
+    {players.map(
+      (player, n) => (<li key={n}><Player player={player} /> <PlayerData player={player} /> </li>)
+    )}
+  </ul>)
 
-  
 }
 
 export { Players, PlayerData, Player }

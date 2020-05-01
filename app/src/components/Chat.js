@@ -7,11 +7,17 @@ function ChatBuffer() {
   const chat = store.use(() => store.get("gameChat"));
 
   useEffect(() => {
-    if (joinedRoom) joinedRoom.onMessage('chat', (message) => store.set('gameChat', [...chat,message]));
-  }, [store,chat]);
+    if (joinedRoom) {
+      joinedRoom.onMessage('chat',
+        (message) => store.set('gameChat', [...chat, message])
+      );
+    }
+  }, [store, chat]);
 
   return (<>
-    {chat.map(({ from, message }, i) => (<li key={i}>{from}: {message}</li>))}
+    {chat.map(
+      ({ from, message }, i) => (<li key={i}>{from}: {message}</li>)
+    )}
   </>)
 
 }
@@ -41,9 +47,9 @@ function ChatInput() {
   }
 
   return (<>
-  <form onSubmit={onSubmit}>
-    <ChatTextInput value={message} onChange={(e) => setMessage(e.target.value)} />
-    <ChatButton />
+    <form onSubmit={onSubmit}>
+      <ChatTextInput value={message} onChange={(e) => setMessage(e.target.value)} />
+      <ChatButton />
     </form>
   </>)
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import './Room.css';
 import Ctx from '../Ctx';
+import { Players } from './PlayerDetails';
 
 function Countdown({ time }) {
   const [secs, setSecs] = React.useState(3)
@@ -38,7 +39,7 @@ function InGameLobby() {
   return (<>
     Give your friends this code:
     <h1>{gameRoom.id}</h1>
-    <Players players={players} maxClients={gameState.maxClients} />
+    <PlayerList players={players} maxClients={gameState.maxClients} />
 
     {gameState.countdown &&
       <div><Countdown time={3} /></div>
@@ -56,7 +57,7 @@ function InGameLobby() {
 }
 
 function InGame() {
-  return (<>
+  return (<><Players/>
     Three.js
   </>)
 }
@@ -78,7 +79,7 @@ function Open() {
   return (<span className="disabled">-- Open --</span>)
 }
 
-function Players({ players, maxClients }) {
+function PlayerList({ players, maxClients }) {
 
   // creates list max number of players
   const playerList = Array.from({ length: maxClients }, (_, i) => players[i]);

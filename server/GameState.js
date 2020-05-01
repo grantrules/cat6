@@ -144,7 +144,10 @@ class GameState extends schema.Schema {
       name || id,
     );
 
+    const playerData = new PlayerData(id);
+
     this.players[id] = player;
+    this.playerData[id] = playerData;
 
     // Broadcast message to other players
     this.sendMessage('joined', player.name);

@@ -2,7 +2,7 @@ const colyseus = require('colyseus');
 const GameState = require('./GameState');
 const nanoid = require('nanoid');
 
-const genId = nanoid.customAlphabet('1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ', 4);
+const genId = nanoid.customAlphabet('ABCDEFGHIJKLMNOPQRSTUVWXYZ', 4);
 
 
 

@@ -11,6 +11,19 @@ Built with:
 * [Colyseus](https://github.com/colyseus/colyseus)
 * [Three.js](https://github.com/mrdoob/three.js) <-- maybe?
 
+Yeah apparently there's a Web Bluetooth API. Only works in Chrome (apparently Edge and Opera are supported, my react app didn't load in Edge and i didn't look much futher into it and I haven't tried Opera)
+
+Here's some resources I've found helpful:
+
+* https://developers.google.com/web/updates/2015/07/interact-with-ble-devices-on-the-web
+* https://googlechrome.github.io/samples/web-bluetooth/
+* https://github.com/aboutjax/framerx-bluetooth-sensors/
+* https://www.bluetooth.com/specifications/gatt/services/
+* https://www.bluetooth.com/specifications/gatt/characteristics/
+
+I'm still trying to figure out if it's possible to control my kickr with this.
+
+Is it a fitness_device?
 
 ### Running
 

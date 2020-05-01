@@ -19,6 +19,20 @@ exports.Room = class extends colyseus.Room {
     this.onMessage("type", (client, message) => {
       this.broadcast(message);
     });
+    this.onMessage('heart', (client,message) => {
+      console.log(`got heart rate from ${client.id}: ${message} bpm`);
+      this.state.playerData[client.id].setHeart(message);
+    });
+    
+    this.onMessage('power', (client,message) => {
+      console.log(`got power rate from ${client.id}: ${message} bpm`);
+      this.state.playerData[client.id].setPower(message);
+    });
+    this.onMessage('cadence', (client,message) => {
+      console.log(`got heart rate from ${client.id}: ${message} bpm`);
+      this.state.playerData[client.id].setCadence(message);
+    });
+
     this.onMessage("ready", (client, message) => {
       this.state.players[client.id].ready = !!message;
 

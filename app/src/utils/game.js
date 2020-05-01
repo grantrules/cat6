@@ -21,6 +21,8 @@ const join = (roomId, name, onStateChange, onMessage) => {
     })
 };
 
+let joinedRoom;
+
 const host = (name, onStateChange, onMessage) => {
   const joinRoom = finishJoin(onStateChange, onMessage)
   return client.create('room', { playerName: name }).then(room => {
@@ -30,6 +32,7 @@ const host = (name, onStateChange, onMessage) => {
   })
 }
 const finishJoin = (onStateChange, onMessage) => (room) => {
+  joinedRoom = room;
   room.onStateChange.once((state) => {
     console.log("this is the first room state!", state);
     onStateChange(state);
@@ -51,7 +54,7 @@ const finishJoin = (onStateChange, onMessage) => (room) => {
   })
 
 }
-export { client, join, host }
+export { client, join, host, joinedRoom }
 
 
 

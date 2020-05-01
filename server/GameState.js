@@ -5,6 +5,47 @@ const schema = require('@colyseus/schema');
 
 const shuffle = (array) => [...array].sort(() => Math.random() - 0.5);
 
+class PlayerData extends schema.Schema {
+  constructor(
+    playerId,
+  ) {
+    super();
+    this.playerId = playerId;
+    this.heart = 0;
+    this.maxHeart = 0;
+    this.cadence = 0;
+    this.maxCadence = 0;
+    this.power = 0;
+    this.maxPower = 0;
+  }
+
+  setPower(power) {
+    this.power = power;
+    this.maxPower = Math.max(this.maxPower, power);
+  }
+
+  setCadence(cadence) {
+    this.cadence = cadence;
+    this.maxCadence = Math.max(this.maxCadence, cadence);
+  }
+  setHeart(heart) {
+    this.heart = heart;
+    this.maxHeart = Math.max(this.maxHeart, heart);
+  }
+
+}
+
+
+schema.defineTypes(PlayerData, {
+  playerId: "string",
+  heart: "number",
+  maxHeart: "number",
+  cadence: "number",
+  maxCadence: "number",
+  power: "number",
+  maxPower: "number",
+});
+
 class Player extends schema.Schema {
   constructor(
     playerId,
@@ -28,7 +69,6 @@ class Player extends schema.Schema {
   setTeam(team) {
     this.team = team;
   }
-
 }
 
 schema.defineTypes(Player, {
@@ -69,6 +109,7 @@ class GameState extends schema.Schema {
     super();
 
     this.players = new schema.MapSchema();
+    this.playerData = new schema.MapSchema();
     this.actions = [];
     this.gameState = 'lobby'; //, 'game'
     this.countdown = false;
@@ -157,6 +198,7 @@ class GameState extends schema.Schema {
 
 schema.defineTypes(GameState, {
   players: { map: Player },
+  playerData: { map: PlayerData },
   gameState: "string",
   countdown: "boolean",
   maxClients: "number",

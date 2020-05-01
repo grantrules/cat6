@@ -4,33 +4,21 @@ const devices = new Map([
     name: 'Power Meter',
     characteristic: 'cycling_power_measurement',
     connected: 'powerConnected',
-    characteristicHandler: (setData) => (event) => {
-      const value = event.target.value.getInt16(1);
-      console.log(`power sensor read `, value);
-      setData(value);
-    }
+    getValue: (value) => value.getInt16(1),
   }],
   ['cadence', {
     device: 'cadence',
     name: 'Cadence Sensor',
     characteristic: 'cadence',
     connected: 'cadenceConnected',
-    characteristicHandler: (setData) => (event) => {
-      const value = event.target.value.getInt8(1);
-      console.log(`cadence sensor read `, value);
-      setData(value);
-    }
+    getValue: (value) => value.getInt8(1),
   }],
   ['heart', {
     device: 'heart_rate',
     name: 'Heart Rate Sensor',
     characteristic: 'heart_rate_measurement',
     connected: 'heartConnected',
-    characteristicHandler: (setData) => (event) => {
-      const value = event.target.value.getInt8(1);
-      console.log(`heart sensor read `, value);
-      setData(value);
-    }
+    getValue: (value) => value.getInt8(1),
   }],
 ]);
 
@@ -41,7 +29,7 @@ const findDevice = async (type) => navigator["bluetooth"].requestDevice({
 const connectDevice = async (device) => device.gatt.connect();
 
 const connect = async (type, setConnected, setData) => {
-  const { device: deviceType, characteristic: characteristicName, characteristicHandler } = devices.get(type);
+  const { device: deviceType, characteristic: characteristicName, getValue } = devices.get(type);
 
   const device = await findDevice(deviceType);
 
@@ -66,8 +54,11 @@ const connect = async (type, setConnected, setData) => {
   }).catch(err => { console.log(err); throw new Error(err.message); });
 
   await characteristic.addEventListener(
-    "characteristicvaluechanged",
-    characteristicHandler(setData)
+    "characteristicvaluechanged",(event) => {
+      const value = getValue(event.target.value);
+      console.log(`${type} sensor read `, value);
+      setData(value);
+    }
   );
 
 }

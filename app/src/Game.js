@@ -5,6 +5,7 @@ import WeightConversion from './components/WeightConversion';
 import { Lobby } from './components/Lobby';
 import { connect, devices, addToArray } from './utils/bluetooth';
 import DeviceData from './components/DeviceData';
+import { joinedRoom } from './utils/game';
 
 const DONT_FORCE_POWERMETER = true;
 
@@ -16,12 +17,15 @@ function DeviceSelector({ type, name }) {
   const store = React.useContext(Ctx);
   const connected = store.use(() => store.get(connectedField));
   const data = store.use(() => store.get(`${type}Data`));
+  const gameRoom = store.use(() => store.get('gameRoom'));
 
   const setConnected = (value) => store.set(connectedField, value);
   const setData = (value) => {
     const newData = addToArray(data, value);
+    if (joinedRoom) {
+      joinedRoom.send(type, value);
+    }
     store.set(`${type}Data`, newData);
-    console.log('react got data', data);
   };
 
   return (

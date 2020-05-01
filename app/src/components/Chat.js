@@ -16,8 +16,8 @@ function ChatBuffer() {
 
 }
 
-function ChatButton({ onClick }) {
-  return (<button onClick={onClick}>Send</button>)
+function ChatButton() {
+  return (<button type="submit">Send</button>)
 
 }
 
@@ -35,9 +35,16 @@ function ChatInput() {
     }
   }
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+    send();
+  }
+
   return (<>
+  <form onSubmit={onSubmit}>
     <ChatTextInput value={message} onChange={(e) => setMessage(e.target.value)} />
-    <ChatButton onClick={send} />
+    <ChatButton />
+    </form>
   </>)
 }
 

@@ -13,6 +13,8 @@ const app = express()
 app.use(cors());
 app.use(express.json());
 
+
+const presence = process.env.NODE_ENV==="production" ? new colyseus.RedisPresence({host: 'redis'}) : new colyseus.LocalPresence()
 const server = http.createServer(app);
 const gameServer = new colyseus.Server({
   server: server,

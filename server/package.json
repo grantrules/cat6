@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "loadtest": "colyseus-loadtest loadtest/example.js --room my_room --numClients 2",
+    "loadtest": "colyseus-loadtest loadtest/room.js --room room --numClients 3 --delay 2000",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -15,14 +15,13 @@
   },
   "homepage": "https://github.com/colyseus/create-colyseus#readme",
   "devDependencies": {
-    "@colyseus/loadtest": "^0.12.0"
+    "@colyseus/loadtest": "^0.13.1"
   },
   "dependencies": {
     "@colyseus/monitor": "^0.12.2",
-    "@colyseus/social": "^0.10.9",
-    "colyseus": "^0.13.0",
+    "colyseus": "^0.13.3",
     "cors": "^2.8.5",
-    "express": "^4.16.4",
+    "express": "^4.17.1",
     "express-jwt": "^5.3.1",
     "nanoid": "^3.1.3"
   }

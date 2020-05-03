@@ -66,9 +66,9 @@ function InGame() {
 }
 
 function Ready({ ready, onClick }) {
-  const className = ready ? "disabled" : "";
+  const className = ready ? "disabled" : "enabled";
   return (
-    <button onClick={onClick} className={className}>Ready</button>
+    <button onClick={onClick} className={`${className} readyBtn`}>Ready</button>
   )
 }
 
@@ -97,7 +97,6 @@ function PlayerList({ players, maxClients }) {
 }
 
 export default function Room() {
-
 
   const store = React.useContext(Ctx);
   const gameState = store.use(() => store.get("gameState").gameState);

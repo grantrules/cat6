@@ -6,6 +6,7 @@ $cursor-click-url: "";
 @import "node_modules/nes.css/scss/utilities/icon-mixin.scss";
 @import "node_modules/nes.css/scss/utilities/visually-hidden.scss";
 @import "node_modules/nes.css/scss/utilities/fill-gaps.scss";
+@import "node_modules/nes.css/scss/utilities/animations.scss";
 
 
 /* @import "node_modules/nes.css/scss/form/radios.scss"; */
@@ -28,11 +29,12 @@ button {
 .App {
   min-height: 550px;
   border: solid 4px rgb(46, 9, 116);
+  outline: 4px solid rgb(25, 5, 61);
   padding: 15px;
+  margin: 5px;
   display: flex;
   background-color: rgba(10, 10, 10, 0.932);
 }
-
 
 
 $heart:  (

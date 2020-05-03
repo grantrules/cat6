@@ -18,3 +18,23 @@ fieldset.player {
 input[type='number'] {
   width: 50%;
 }
+
+.powerSelect button {
+animation: blinkborder 1s linear 0s infinite alternate;
+}
+
+.readyBtn.enabled {
+  animation: blinkborder 1s linear 0s infinite alternate;
+}
+
+@keyframes blinkborder {
+  50% {border-color:rgb(155,12,142);color:rgb(155,12,142);}
+}
+
+.playerInput {
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+.playerInput .title {
+  margin-bottom: 5px;
+}

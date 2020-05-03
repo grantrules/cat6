@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { client, join, host } from '../utils/game';
 import Ctx from '../Ctx';
 import Room from './Room';
+import { BackBtn } from './Buttons';
 
 function RoomCode({ join, back }) {
 
@@ -18,12 +19,13 @@ function RoomCode({ join, back }) {
   )
 }
 
-function StartGame({ name, hostGame, joinGame }) {
+function StartGame({ name, hostGame, joinGame, Back }) {
   return (<>
     <h1>Welcome {name}</h1>
     <ul>
       <li><button onClick={hostGame}>Host Game</button></li>
       <li><button onClick={joinGame}>Join Game</button></li>
+      <li>{Back}</li>
     </ul>
   </>)
 }
@@ -43,7 +45,7 @@ export function Lobby({ Back }) {
 
   console.log('rendering lobby');
   console.log(client);
-  
+
   const store = React.useContext(Ctx);
   const playerName = store.use(() => store.get("playerName"));
   const playerWeight = store.use(() => store.get("playerWeight"));
@@ -64,13 +66,13 @@ export function Lobby({ Back }) {
   }
 
   const joinRoom = (room) => {
-    join(room, playerName, playerWeight.weight, onStateChange, onMessage).then(room=>store.set('gameRoom', room)).catch((err) =>
+    join(room, playerName, playerWeight.weight, onStateChange, onMessage).then(room => store.set('gameRoom', room)).catch((err) =>
       setError(err.message)
     )
   }
 
   const joinGame = () => setLobbyState('join');
-  const hostGame = () => host(playerName, playerWeight.weight, onStateChange, onMessage).then(room=>store.set('gameRoom', room))
+  const hostGame = () => host(playerName, playerWeight.weight, onStateChange, onMessage).then(room => store.set('gameRoom', room))
 
 
   return (<>
@@ -84,10 +86,10 @@ export function Lobby({ Back }) {
     {connected && !inRoom &&
       <>
         {lobbyState === 'start' &&
-          <StartGame name={playerName} hostGame={hostGame} joinGame={joinGame} />}
+          <StartGame name={playerName} hostGame={hostGame} joinGame={joinGame} Back={Back}/>}
 
         {lobbyState === 'join' &&
-          <JoinGame setLobbyState={setLobbyState} join={joinRoom} error={error} />}
+          <JoinGame setLobbyState={setLobbyState} join={joinRoom} error={error} Back={<BackBtn onClick={()=>setLobbyState('start')}/>}/>}
       </>
     }
 

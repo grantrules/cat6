@@ -1,6 +1,13 @@
 :root {
-  --disabled: #012c03;
+  --xdisabled: #012c03;
+  --disabled: rgb(25, 5, 61);
   --error: #940000;
+  --purple: rgb(155,12,142);
+  --dark-purple: rgb(25, 5, 61);
+  --medium-purple: rgb(46, 9, 116);
+  --light-blue: #1296be;
+  --dark-blue: rgb(11,52,127);
+  --dark-transparent-background: rgba(10, 10, 10, 0.932)
 }
 
 #root {
@@ -16,7 +23,7 @@ body {
   margin: 0;
   padding: 0;
   background-color:#000;
-  color:rgb(155,12,142);
+  color: var(--purple);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -44,11 +51,15 @@ button {
 input {
   padding: 5px;
   margin: 5px;
+ 
+}
+input[type='text'],input[type='number'] {
   background-color: inherit;
-  color: rgb(41, 41, 41);
+  color: var(--light-blue);
+  /* color: rgb(41, 41, 41); */
   border: 0;
 
-  border-bottom: solid 4px #008106;
+  border-bottom: solid 4px var(--dark-blue);
 }
 
 .device-unconnected {

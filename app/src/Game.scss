@@ -27,8 +27,15 @@ animation: blinkborder 1s linear 0s infinite alternate;
   animation: blinkborder 1s linear 0s infinite alternate;
 }
 
+button:hover {
+  background-color: var(--purple);
+}
+.readyBtn.disabled {
+  background-color: var(--dark-blue);
+}
+
 @keyframes blinkborder {
-  50% {border-color:rgb(155,12,142);color:rgb(155,12,142);}
+  50% {border-color:var(--purple);color:var(--purple);}
 }
 
 .playerInput {

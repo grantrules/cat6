@@ -11,29 +11,25 @@ $cursor-click-url: "";
 
 /* @import "node_modules/nes.css/scss/form/radios.scss"; */
 
-button, input[type='text'], input[type='number'] {
-  background-color: #1296be;
+button, input[type='texxt'], input[type='numbxer'] {
+  background-color: var(--light-blue);
   padding: 13px;
 }
 
-fieldset {
-
-}
-
 button {
-  border: solid 4px rgb(46, 9, 116);
+  border: solid 4px var(--medium-purple);
 
 }
 
 .App > div { margin: auto; }
 .App {
   min-height: 550px;
-  border: solid 4px rgb(46, 9, 116);
-  outline: 4px solid rgb(25, 5, 61);
+  border: solid 4px var(--medium-purple);
+  outline: 4px solid var(--dark-purple);
   padding: 15px;
   margin: 5px;
   display: flex;
-  background-color: rgba(10, 10, 10, 0.932);
+  background-color: var(--dark-transparent-background);
 }
 
 

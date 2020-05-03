@@ -24,11 +24,11 @@ function WeightConversion({ name, weightObj: { weight, isKg }, update }) {
     <div className="weightconversion">
       <input type="number" name={name} value={isKg ? weight : Math.round(kgToLbs(weight))} onChange={onChange} />
       <label>
-        <input type="radio" className="nes-radio" checked={isKg} onChange={() => radioChange({ isKg: true, weight: Math.round(kgToLbs(weight)) })} />
+        <input type="radio" checked={isKg} onChange={() => radioChange({ isKg: true, weight: Math.round(kgToLbs(weight)) })} />
         <span>kg</span>
       </label>
       <label>
-        <input type="radio" className="nes-radio" checked={!isKg} onChange={() => radioChange({ isKg: false, weight: Math.round(lbsToKg(weight)*10)/10 })} />
+        <input type="radio" checked={!isKg} onChange={() => radioChange({ isKg: false, weight: Math.round(lbsToKg(weight)*10)/10 })} />
         <span>lbs</span>
       </label>
     </div>

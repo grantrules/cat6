@@ -12,21 +12,25 @@ function Game() {
   console.log('rendering game...');
 
   return (
+    <>
+      <header className="logo">
+        <Logo />
+      </header>
+      <section>
+        {isGameState('details') &&
+          <Details Next={(<NextBtn onClick={() => setGameState("lobby")} />)} />
 
-    <div>
-      <Logo />
+        }
 
-      {isGameState('details') &&
-        <Details Next={(<NextBtn onClick={() => setGameState("lobby")}/>)} />
+        {isGameState('lobby') &&
+          <Lobby Back={(<BackBtn onClick={() => setGameState('details')} />)} />
+        }
+      </section>
 
-      }
-
-      {isGameState('lobby') &&
-        <Lobby Back={(<BackBtn onClick={() =>setGameState('details')}/>)} />
-      }
-
-      <DeviceStatuses />
-    </div>
+      <footer>
+        <DeviceStatuses />
+      </footer>
+    </>
   );
 }
 

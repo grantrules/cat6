@@ -2,12 +2,14 @@ const devices = new Map([
   ['power', {
     device: 'cycling_power',
     name: 'Power Meter',
+    unit: 'w',
     characteristic: 'cycling_power_measurement',
     connected: 'powerConnected',
     getValue: (value) => value.getInt16(1),
   }],
   ['cadence', {
     device: 'cadence',
+    unit: 'rpm',
     name: 'Cadence Sensor',
     characteristic: 'cadence',
     connected: 'cadenceConnected',
@@ -15,6 +17,7 @@ const devices = new Map([
   }],
   ['heart', {
     device: 'heart_rate',
+    unit: 'bpm',
     name: 'Heart Rate Sensor',
     characteristic: 'heart_rate_measurement',
     connected: 'heartConnected',

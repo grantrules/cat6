@@ -124,12 +124,12 @@ function PlayerDetailScreen() {
 
 function DeviceStatus({ type }) {
 
-  const { connected: connectedField, name } = devices.get(type);
+  const { connected: connectedField, name, unit } = devices.get(type);
   const store = React.useContext(Ctx);
   const connected = store.use(() => store.get(connectedField));
 
   return (<>
-    <div className={`${type}-device device-${connected ? 'connected' : 'unconnected'}`}>{name} <span className="heart"></span>{connected && <><DeviceData type={type} /> bpm</>}</div>
+    <div className={`${type}-device device-${connected ? 'connected' : 'unconnected'}`}>{name} <span className={`${type}-icon`}></span>{connected && <><DeviceData type={type} /> {unit}</>}</div>
   </>)
 }
 

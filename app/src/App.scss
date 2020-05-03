@@ -10,7 +10,23 @@ $cursor-click-url: "";
 
 
 /* @import "node_modules/nes.css/scss/form/radios.scss"; */
+@media screen and (min-width: 760px) {
+  .App {
+    min-width: 550px;
+  }
+}
 
+@media screen and (min-height: 550px) {
+  .App {
+    min-height: 550px;
+  }
+}
+
+
+footer {
+  display: flex;
+  flex-flow: row wrap;
+}
 button, input[type='texxt'], input[type='numbxer'] {
   background-color: var(--light-blue);
   padding: 13px;
@@ -26,15 +42,18 @@ button:hover {
   left: -2px;
 }
 
-.App > div { margin: auto; }
 .App {
-  min-height: 550px;
   border: solid 4px var(--medium-purple);
   outline: 4px solid var(--dark-purple);
   padding: 15px;
   margin: 10px;
   display: flex;
+  flex-direction: column;
   background-color: var(--dark-transparent-background);
+}
+
+.App footer {
+margin-top: auto;
 }
 
 
@@ -46,6 +65,24 @@ $heart:  (
   (0,0,1,1,1,0,0),
   (0,0,0,1,0,0,0),
   );
+
+  $power:  (
+  (0,0,0,1,1,1,1),
+  (0,0,1,1,1,1,0),
+  (0,0,0,1,1,1,1),
+  (0,0,1,1,1,1,0),
+  (0,1,1,1,0,0,0),
+  (0,0,1,0,0,0,0),
+  );
+
+  $cadence:  (
+    (1,1,1,1,0,0,0),
+    (0,0,1,0,0,0,0),
+    (0,0,1,0,0,0,0),
+    (0,0,1,1,1,0,0),
+    (0,0,0,0,1,0,0),
+    (0,0,0,1,1,1,1),
+    );
 
 @mixin show-icon($logo, $logo-colors) {
     $px: 2px;
@@ -160,10 +197,15 @@ $heart:  (
     }
   }
 }
-.heart {
+.power-icon {
+  @include show-icon($power, (rgb(238, 255, 5)));
+}
+.heart-icon {
   @include show-icon($heart, (#f00));
 }
-
+.cadence-icon {
+  @include show-icon($cadence, (#aaa));
+}
 input[type="radio"] {
   @include nes-radio;
 }

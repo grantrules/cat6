@@ -61,6 +61,7 @@ class EventType {
 
   use(handler, deps = undefined) {
     //React.useEffect(() => this.on(handler), deps || [handler]);
+    // eslint-disable-next-line
     React.useEffect(() => this.on(handler), [...deps, handler]);
   }
 }

@@ -1,19 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Logo from './components/Logo';
-import Ctx from './Ctx';
-import WeightConversion from './components/WeightConversion';
 import { Lobby } from './components/Lobby';
-import { connect, devices, addToArray } from './utils/bluetooth';
-import DeviceData from './components/DeviceData';
-import { joinedRoom } from './utils/game';
 import './Game.scss';
 import { Details, DeviceStatuses } from './components/Details';
 
-const DONT_FORCE_POWERMETER = true;
 
 
-function NextButton({ onClick }) {
-  return (<button onClick={onClick}>Next</button>)
+function Button({ txt, onClick }) {
+  return (<button onClick={onClick}>{txt}</button>)
 }
 
 function Game() {
@@ -33,13 +27,13 @@ function Game() {
       <Logo />
 
       {isGameState('details') &&
-        <Details Next={(<NextButton onClick={() => setGameState("lobby")}/>)} />
+        <Details Next={(<Button txt="Next" onClick={() => setGameState("lobby")}/>)} />
 
       }
 
 
       {isGameState('lobby') &&
-        <Lobby />
+        <Lobby Back={(<Button txt="Back" onClick={() =>setGameState('details')}/>)} />
       }
 
       <DeviceStatuses />

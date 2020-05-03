@@ -75,7 +75,7 @@ const add = (max) => (data, val) => {
 
 const addToArray = add(10);
 
-
+/*
 const reducer = {
   heart: (data) => {
     const { sum, num, times } = data.reduce((acc, cur) => {
@@ -89,5 +89,6 @@ const reducer = {
 
   }
 }
+*/
 
-export { connect, devices, addToArray, reducer };
+export { connect, devices, addToArray, /* reducer */ };

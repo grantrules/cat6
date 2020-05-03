@@ -17,7 +17,7 @@ function Countdown({ time }) {
 }
 
 
-function InGameLobby() {
+function InGameLobby({ Back }) {
   
   const store = React.useContext(Ctx);
   const gameState = store.use(() => store.get("gameState"));
@@ -52,6 +52,7 @@ function InGameLobby() {
       <div>Waiting for everyone to click Ready</div>
       }</>
     }
+    {Back}
     <Ready ready={ready} onClick={readyClick} />
 
     <ChatRoom/>
@@ -96,7 +97,7 @@ function PlayerList({ players, maxClients }) {
   </>)
 }
 
-export default function Room() {
+export default function Room({ Back }) {
 
   const store = React.useContext(Ctx);
   const gameState = store.use(() => store.get("gameState").gameState);
@@ -104,7 +105,7 @@ export default function Room() {
   return (<>
 
     {gameState === 'lobby' &&
-      <InGameLobby/>
+      <InGameLobby Back={Back}/>
     }
 
     {gameState === 'game' &&

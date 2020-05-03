@@ -39,7 +39,7 @@ function JoinGame({ join, setLobbyState, error }) {
 
 }
 
-export function Lobby() {
+export function Lobby({ Back }) {
 
   console.log('rendering lobby');
   console.log(client);
@@ -91,7 +91,7 @@ export function Lobby() {
       </>
     }
 
-    {inRoom && <Room />}
+    {inRoom && <Room Back={Back} />}
 
   </>
   )

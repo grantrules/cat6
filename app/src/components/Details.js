@@ -8,22 +8,21 @@ import { joinedRoom } from '../utils/game';
 
 
 function Details({ Next }) {
-  const [powerRequiredError, setPowerRequiredError] = useState(false);
+  const [powerRequiredError, /* setPowerRequiredError */] = useState(false);
 
   const { connected: connectedField } = devices.get('power');
   const store = React.useContext(Ctx);
   const powerConnected = store.use(() => store.get(connectedField));
 
-
+  /*
   const checkPowerConnected = () => {
-    /*
     if (!powerConnected && !DONT_FORCE_POWERMETER) {
       setPowerRequiredError(true);
     } else {
       setGameState('name_select');
     }
-    */
   }
+*/
   return (
     <>
       <div className="details">
@@ -41,7 +40,7 @@ function DeviceSelector({ type, name }) {
   const store = React.useContext(Ctx);
   const connected = store.use(() => store.get(connectedField));
   const data = store.use(() => store.get(`${type}Data`));
-  const gameRoom = store.use(() => store.get('gameRoom'));
+  // const gameRoom = store.use(() => store.get('gameRoom'));
 
   const setConnected = (value) => store.set(connectedField, value);
   const setData = (value) => {

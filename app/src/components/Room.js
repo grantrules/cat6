@@ -1,5 +1,5 @@
 import React from 'react';
-import './Room.css';
+import './Room.scss';
 import Ctx from '../Ctx';
 import { Players } from './PlayerDetails';
 import { ChatRoom } from './Chat';

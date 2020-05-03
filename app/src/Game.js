@@ -6,6 +6,7 @@ import { Lobby } from './components/Lobby';
 import { connect, devices, addToArray } from './utils/bluetooth';
 import DeviceData from './components/DeviceData';
 import { joinedRoom } from './utils/game';
+import './Game.scss';
 
 const DONT_FORCE_POWERMETER = true;
 
@@ -31,7 +32,7 @@ function DeviceSelector({ type, name }) {
   return (
     <span className={`${type}Select`}>
       {!connected ?
-        <button onClick={() => connect(type, setConnected, setData)}>Connect {name}</button>
+        <button onClick={() => connect(type, setConnected, setData)}>{name}</button>
         :
         <div>{name} connected</div>
       }
@@ -39,25 +40,27 @@ function DeviceSelector({ type, name }) {
   )
 }
 
-function DeviceSelectScreen({ Next, powerRequiredError, connected }) {
+function DeviceSelectScreen({ powerRequiredError, connected }) {
   //console.log(`connected?`, connected);
   const errClass = powerRequiredError && !connected ? "error" : "";
   return (
     <>
-      <div>
-        <span className={errClass}>Required --&gt;</span> <DeviceSelector type="power" name="Power Meter" /> <span className={errClass}>&lt;-- Required</span>
-      </div>
-      <div>
-        <DeviceSelector type="cadence" name="Cadence Sensor" />
-      </div>
-      <div>
-        <DeviceSelector type="heart" name="Heart Rate Sensor" />
-      </div>
-      {Next}
+      <fieldset>
+        <legend>Devices</legend>
+        <div>
+          <DeviceSelector type="power" className={`powerButton ${errClass}`} name="Power Meter" />
+        </div>
+        <div>
+          <DeviceSelector type="cadence" name="Cadence Sensor" />
+        </div>
+        <div>
+          <DeviceSelector type="heart" name="Heart Rate Sensor" />
+        </div>
+      </fieldset>
     </>);
 }
 
-function PlayerDetailScreen({ Next }) {
+function PlayerDetailScreen() {
 
   const store = React.useContext(Ctx);
   const name = store.use(() => store.get("playerName"));
@@ -71,6 +74,7 @@ function PlayerDetailScreen({ Next }) {
   }, [name, weight, isKg]);
 
   const update = ({ weight, isKg }) => {
+    console.log("what?")
     store.set('playerWeight', { weight, isKg });
   }
 
@@ -78,13 +82,15 @@ function PlayerDetailScreen({ Next }) {
 
   return (
     <>
-      <div>
-        Player Name: <input type="text" name="playerName" maxLength="16" value={name} onChange={handleChange('playerName')} />
-      </div>
-      <div>
-        Player Weight: <WeightConversion name="weight" weight={weight} isKg={isKg} update={update} />
-      </div>
-      {Next}
+      <fieldset className="player">
+        <legend>Player</legend>
+        <div>Player Name:</div>
+        <input type="text" name="playerName" maxLength="16" value={name} onChange={handleChange('playerName')} />
+        <div>
+        Player Weight:
+        </div>
+        <WeightConversion name="weight" weight={weight} isKg={isKg} update={update} />
+      </fieldset>
     </>);
 }
 
@@ -95,7 +101,7 @@ function DeviceStatus({ type }) {
   const connected = store.use(() => store.get(connectedField));
 
   return (<>
-    <div className={`device-${connected ? 'connected' : 'unconnected'}`}>{name} {connected && <><DeviceData type={type}/> bpm</>}</div>
+    <div className={`${type}-device device-${connected ? 'connected' : 'unconnected'}`}>{name} <span class="heart"></span>{connected && <><DeviceData type={type} /> bpm</>}</div>
   </>)
 }
 
@@ -144,12 +150,15 @@ function Game() {
       <Logo />
 
       {isGameState('device_select') &&
-        <DeviceSelectScreen connected={powerConnected} powerRequiredError={powerRequiredError} Next={<NextBtn state="name_select" />} />
+        <>
+          <div className="details">
+            <DeviceSelectScreen connected={powerConnected} powerRequiredError={powerRequiredError} />
+            <PlayerDetailScreen />
+          </div>
+          <NextBtn state="lobby" />
+        </>
       }
 
-      {isGameState('name_select') &&
-        <PlayerDetailScreen Next={<NextBtn state="lobby" />} />
-      }
 
       {isGameState('lobby') &&
         <Lobby />

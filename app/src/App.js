@@ -1,6 +1,7 @@
 import React from "react";
 import Game from "./Game";
 import Ctx from './Ctx';
+import './App.scss';
 
 function App() {
   const [store] = React.useState(() => {
@@ -32,7 +33,7 @@ function App() {
   });
 
   return (
-    <main>
+    <main className="App">
       <Ctx.Provider value={store}>
         <Game />
       </Ctx.Provider>

@@ -7,6 +7,7 @@ function WeightConversion({ name, weight, isKg, update }) {
   const radioChange = ({ weight, isKg }) => update({ weight, isKg });
 
   const onChange = ({ target: { value } }) => {
+    console.log('hm');
     const weight = Math.round(value * (isKg ? 1 : 1 / 0.45359237));
     update({ weight, isKg });
   }
@@ -18,10 +19,17 @@ function WeightConversion({ name, weight, isKg, update }) {
       <li>isKg: {isKg ? 'y' : 'n'}</li>
     </ul>*/}
 
-
-    <input type="number" name={name} value={isKg ? weight : Math.round(kgToLbs(weight))} onChange={onChange} />
-    <input type="radio" checked={isKg} onChange={() => radioChange({ isKg: true, weight: Math.round(kgToLbs(weight)) })} />kg
-    <input type="radio" checked={!isKg} onChange={() => radioChange({ isKg: false, weight: Math.round(lbsToKg(weight)) })} />lbs
+    <div className="weightconversion">
+      <input type="number" name={name} value={isKg ? weight : Math.round(kgToLbs(weight))} onChange={onChange} />
+      <label>
+        <input type="radio" className="nes-radio" checked={isKg} onChange={() => radioChange({ isKg: true, weight: Math.round(kgToLbs(weight)) })} />
+        <span>kg</span>
+      </label>
+      <label>
+        <input type="radio" className="nes-radio" checked={!isKg} onChange={() => radioChange({ isKg: false, weight: Math.round(lbsToKg(weight)) })} />
+        <span>lbs</span>
+      </label>
+    </div>
   </>)
 
 

@@ -18,7 +18,12 @@ button, input[type='texxt'], input[type='numbxer'] {
 
 button {
   border: solid 4px var(--medium-purple);
+}
 
+button:hover {
+  position: relative;
+  top: -2px;
+  left: -2px;
 }
 
 .App > div { margin: auto; }

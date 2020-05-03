@@ -3,6 +3,15 @@
   --error: #940000;
 }
 
+#root {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+html, body { width: 100%; height: 100%; }
+
 body {
   margin: 0;
   padding: 0;
@@ -10,7 +19,6 @@ body {
   color:rgb(155,12,142);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  width: 100%;
   text-align: center;
 
 }

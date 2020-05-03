@@ -21,7 +21,7 @@ function RoomCode({ join, back }) {
 
 function StartGame({ name, hostGame, joinGame, Back }) {
   return (<>
-    <h1>Welcome {name}</h1>
+    <h2>Welcome {name}</h2>
     <ul>
       <li><button onClick={hostGame}>Host Game</button></li>
       <li><button onClick={joinGame}>Join Game</button></li>

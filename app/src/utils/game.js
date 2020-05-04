@@ -16,7 +16,7 @@ const join = (roomId, name, weight, onStateChange, onMessage) => {
   return client.joinById(roomId, { playerName: name, playerWeight: weight })
     .then(room => { joinRoom(room); return room; })
     .catch((err) => {
-      const error = err.message.indexOf("not found") ? "Room not found" : "Error joining room";
+      const error = err && err.message && err.message.indexOf("not found") ? "Room not found" : "Error joining room";
       throw new Error(error);
     })
 };

@@ -13,7 +13,7 @@ function RoomCode({ join, back }) {
   return (
     <>
       <div><input type="text" name="roomCode" value={value} onChange={updateValue} size="4" className="large-input" /></div>
-      <button onClick={() => join(value)}>Enter</button>
+      <button onClick={() => join(value).catch(err=>console.log(err))}>Enter</button>
     </>
   )
 }
@@ -32,7 +32,7 @@ function StartGame({ name, hostGame, joinRoom, error, Back }) {
         <h3>
           Enter the game code:
         </h3>
-        <RoomCode join={join} />
+        <RoomCode join={joinRoom} />
         {error && <div className="error">{error}</div>}
       </fieldset>
     </div>
@@ -67,12 +67,10 @@ export function Lobby({ Back }) {
     console.log("react getting message", message);
   }
 
-  const joinRoom = (room) => {
-    console.log(playerWeight.weight);
-    join(room, playerName, Number(playerWeight.weight), onStateChange, onMessage).then(room => store.set('gameRoom', room)).catch((err) =>
-      setError(err.message)
-    )
-  }
+  const joinRoom = (roomId) => join(roomId, playerName, Number(playerWeight.weight), onStateChange, onMessage)
+      .then(room =>store.set('gameRoom', room))
+      .catch(e =>setError(e.message))
+  
 
   const hostGame = () => host(playerName, Number(playerWeight.weight), onStateChange, onMessage).then(room => store.set('gameRoom', room))
 
@@ -88,12 +86,12 @@ export function Lobby({ Back }) {
     {connected && !inRoom &&
       <>
         {lobbyState === 'start' &&
-          <StartGame name={playerName} hostGame={hostGame} joinRoom={joinRoom} Back={Back} />}
+          <StartGame name={playerName} hostGame={hostGame} joinRoom={joinRoom} error={error} Back={Back} />}
 
       </>
     }
 
-    {inRoom && <Room Back={<BackBtn onClick={()=>{gameRoom.leave();store.set("gameRoom", null)}}/>} />}
+    {inRoom && <Room Back={<BackBtn onClick={() => { gameRoom.leave(); store.set("gameRoom", null) }} />} />}
 
   </>
   )

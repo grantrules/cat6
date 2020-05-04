@@ -33,10 +33,6 @@ $cursor-click-url: "";
 }
 
 
-footer {
-  display: flex;
-  flex-flow: row wrap;
-}
 button, input[type='texxt'], input[type='numbxer'] {
   background-color: var(--light-blue);
   padding: 13px;
@@ -69,6 +65,10 @@ button:hover {
 
 .App footer {
 margin-top: auto;
+
+display: flex;
+flex-flow: row wrap;
+justify-content: space-around;
 }
 
 

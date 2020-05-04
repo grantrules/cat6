@@ -1,6 +1,7 @@
 :root {
   --xdisabled: #012c03;
-  --disabled: rgb(25, 5, 61);
+  --xxdisabled: rgb(25, 5, 61);
+  --disabled: rgb(57, 50, 73);
   --error: #940000;
   --purple: rgb(155,12,142);
   --dark-purple: rgb(25, 5, 61);

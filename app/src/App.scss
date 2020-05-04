@@ -10,9 +10,9 @@ $cursor-click-url: "";
 
 
 /* @import "node_modules/nes.css/scss/form/radios.scss"; */
-@media screen and (min-width: 760px) {
+@media screen and (min-width: 880px) {
   .App {
-    min-width: 550px;
+    width: 880px;
   }
 }
 
@@ -20,6 +20,16 @@ $cursor-click-url: "";
   .App {
     min-height: 550px;
   }
+}
+
+
+.roomchoice {
+  display: flex;
+  flex-wrap: row wrap;
+  align-content: center;
+}
+.roomchoice > fieldset {
+  margin: 15px;
 }
 
 

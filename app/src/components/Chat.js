@@ -14,7 +14,7 @@ function ChatBuffer() {
       );
     }
     return () => store.set('gameChat', []);
-  }, [store, chat]);
+  }, [store, chat, gameRoom]);
 
 
   return (<>

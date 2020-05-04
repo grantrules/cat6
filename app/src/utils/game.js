@@ -26,7 +26,6 @@ let joinedRoom;
 const host = (name, weight, onStateChange, onMessage) => {
   const joinRoom = finishJoin(onStateChange, onMessage)
   return client.create('room', { playerName: name, playerWeight: weight }).then(room => {
-    console.log(room);
     joinRoom(room)
     return room;
   })

@@ -87,7 +87,7 @@ export function Lobby({ Back }) {
       <StartGame name={playerName} hostGame={hostGame} joinRoom={joinRoom} error={error} Back={Back} />}
 
 
-    {inRoom && <Room Back={<BackBtn onClick={() => { gameRoom.leave(); store.set("gameRoom", null) }} />} />}
+    {inRoom && <Room Back={<BackBtn onClick={() => { store.set("gameRoom", null);gameRoom.leave();  store.set("gameChat", []) }} />} />}
 
   </>
   )

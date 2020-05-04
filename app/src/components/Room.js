@@ -15,9 +15,19 @@ function Countdown({ time }) {
   return (<>{secs <= 0 ? "GO" : `Starting in ${secs}...`}</>)
 }
 
+function ShareCode() {
+  const store = React.useContext(Ctx);
 
-function InGameLobby({ Back }) {
-  
+  const gameRoomId = store.use(() => store.get("gameRoom") && store.get("gameRoom").id);
+
+  return (<>
+    Give your friends this code:
+    <h1>{gameRoomId}</h1></>)
+
+}
+
+
+function LobbyDetails({ Back }) {
   const store = React.useContext(Ctx);
   const gameState = store.use(() => store.get("gameState"));
   const gamePlayers = store.use(() => store.get("gameState").players);
@@ -36,10 +46,7 @@ function InGameLobby({ Back }) {
   const readyClick = () => {
     gameRoom.send("ready", !ready);
   }
-  return (<>
-    Give your friends this code:
-    <h1>{gameRoom.id}</h1>
-    <PlayerList players={players} maxClients={gameState.maxClients} />
+  return (<><PlayerList players={players} maxClients={gameState.maxClients} />
 
     {gameState.countdown &&
       <div><Countdown time={3} /></div>
@@ -48,19 +55,33 @@ function InGameLobby({ Back }) {
       <>{players.length !== gameState.maxClients ?
         <div>Waiting for more players</div>
         :
-      <div>Waiting for everyone to click Ready</div>
+        <div>Waiting for everyone to click Ready</div>
       }</>
     }
     {Back}
     <Ready ready={ready} onClick={readyClick} />
+  </>)
+}
 
-    <ChatRoom/>
+function InGameLobby({ Back }) {
+  return (<>
+    <ShareCode />
+    <div className="roomlobby">
+      <div>
+        <LobbyDetails Back={Back} />
+      </div>
+      <fieldset>
+        <legend>Chat</legend>
+
+        <ChatRoom className="lobbychat" />
+      </fieldset>
+    </div>
 
   </>)
 }
 
 function InGame() {
-  return (<><Players/>
+  return (<><Players />
     Three.js
   </>)
 }
@@ -90,8 +111,8 @@ function PlayerList({ players, maxClients }) {
   return (<><h2>Players</h2>
     <ul className="playerList">
       {playerList.map(
-        (player, n) => (<li key={n}>{n + 1}. {player ? <Filled player={player}/> : <Open/>}</li>)
-        )}
+        (player, n) => (<li key={n}>{n + 1}. {player ? <Filled player={player} /> : <Open />}</li>)
+      )}
     </ul>
   </>)
 }
@@ -104,7 +125,7 @@ export default function Room({ Back }) {
   return (<>
 
     {gameState === 'lobby' &&
-      <InGameLobby Back={Back}/>
+      <InGameLobby Back={Back} />
     }
 
     {gameState === 'game' &&

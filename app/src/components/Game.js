@@ -4,11 +4,21 @@ import { Lobby } from './Lobby';
 import { Details, DeviceStatuses } from './Details';
 import { NextBtn, BackBtn } from './Buttons';
 
+function NoBluetooth() {
+  return (<>
+    <h1>Sorry, you gotta use Chrome</h1>
+    <p>Or any other browser with the Web Bluetooth API</p>
+  </>
+  )
+}
+
 function Game() {
 
   const [gameState, setGameState] = useState('details');
   const isGameState = (state) => state === gameState;
   console.log('rendering game...');
+
+  const hasBluetooth = navigator['bluetooth'] !== undefined;
 
   return (
     <>
@@ -16,14 +26,22 @@ function Game() {
         <Logo />
       </header>
       <section>
-        {isGameState('details') &&
-          <Details Next={(<NextBtn onClick={() => setGameState("lobby")} />)} />
+        {hasBluetooth ?
+          <>
+            {isGameState('details') &&
+              <Details Next={(<NextBtn onClick={() => setGameState("lobby")} />)} />
 
+            }
+
+            {isGameState('lobby') &&
+              <Lobby Back={(<BackBtn onClick={() => setGameState('details')} />)} />
+            }
+          </>
+          :
+          <NoBluetooth />
         }
 
-        {isGameState('lobby') &&
-          <Lobby Back={(<BackBtn onClick={() => setGameState('details')} />)} />
-        }
+
       </section>
 
       <footer>

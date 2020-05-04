@@ -70,10 +70,10 @@ function DeviceSelectScreen({ powerRequiredError, connected }) {
         <DeviceSelector type="power" className={`powerButton ${errClass}`} name="Power Meter" />
       </div>
       <div>
-        <DeviceSelector type="cadence" name="Cadence Sensor" />
+        <DeviceSelector type="heart" name="Heart Rate" />
       </div>
       <div>
-        <DeviceSelector type="heart" name="Heart Rate Sensor" />
+        <DeviceSelector type="cadence" name="Cadence" />
       </div>
     </fieldset>
   );

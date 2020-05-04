@@ -10,7 +10,7 @@ const devices = new Map([
   ['cadence', {
     device: 'cadence',
     unit: 'rpm',
-    name: 'Cadence Sensor',
+    name: 'Cadence',
     characteristic: 'cadence',
     connected: 'cadenceConnected',
     getValue: (value) => value.getInt8(1),
@@ -18,7 +18,7 @@ const devices = new Map([
   ['heart', {
     device: 'heart_rate',
     unit: 'bpm',
-    name: 'Heart Rate Sensor',
+    name: 'Heart Rate',
     characteristic: 'heart_rate_measurement',
     connected: 'heartConnected',
     getValue: (value) => value.getInt8(1),

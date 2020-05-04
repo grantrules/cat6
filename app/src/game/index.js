@@ -124,7 +124,6 @@ function start() {
     });
     */
     const hmm = document.body.appendChild(app.view);
-    console.log(hmm);
 
 //});
 }

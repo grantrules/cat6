@@ -13,7 +13,7 @@ function ChatBuffer() {
         (message) => store.set('gameChat', [...chat, message])
       );
     }
-    return () => store.set('gameChat', []);
+    // return () => store.set('gameChat', []);
   }, [store, chat, gameRoom]);
 
 
@@ -59,12 +59,11 @@ function ChatInput() {
     </form>
   </>)
 }
-
-function ChatRoom() {
-  return (<>
+function ChatRoom({ className }) {
+  return (<div className={className}>
     <ChatBuffer />
     <ChatInput />
-  </>);
+  </div>);
 }
 
 export { ChatRoom }

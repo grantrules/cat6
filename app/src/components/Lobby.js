@@ -4,7 +4,7 @@ import Ctx from '../Ctx';
 import Room from './Room';
 import { BackBtn } from './Buttons';
 
-function RoomCode({ joinRoom, back }) {
+function RoomCode({ joinRoom }) {
 
   const [value, setValue] = useState('');
 
@@ -12,8 +12,8 @@ function RoomCode({ joinRoom, back }) {
 
   return (
     <>
-      <div><input type="text" name="roomCode" value={value} onChange={updateValue} size="4" className="large-input" /></div>
-      <button onClick={() => joinRoom(value)}>Enter</button>
+      <input type="text" name="roomCode" value={value} onChange={updateValue} size="4" className="large-input" />
+      <button onClick={() => joinRoom(value)}>Join</button>
     </>
   )
 }

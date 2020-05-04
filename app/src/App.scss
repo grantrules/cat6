@@ -22,13 +22,16 @@ $cursor-click-url: "";
   }
 }
 
-
+.roomchoice button {
+  font-size: x-large;
+}
 .roomchoice {
   display: flex;
   flex-wrap: row wrap;
   align-content: center;
 }
 .roomchoice > fieldset {
+  flex-basis: 50%;
   margin: 15px;
 }
 

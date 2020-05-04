@@ -23,10 +23,14 @@ $cursor-click-url: "";
 .roomchoice button {
   font-size: x-large;
 }
-
+@media screen and (min-width: 550px) {
+  .roomchoice {
+    flex-wrap: row wrap;
+  }
+}
 .roomchoice {
   display: flex;
-  flex-wrap: row wrap;
+  flex-wrap: column wrap;
   align-content: center;
 }
 .roomchoice > fieldset {

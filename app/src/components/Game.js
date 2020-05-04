@@ -13,13 +13,15 @@ function NoBluetooth() {
 }
 
 function About({ Back }) {
-  return (<><p>
-    Hi, I made this after I learned about the Bluetooth API and was bored riding around Watopia during quarantine
-</p>
+  return (<fieldset>
+    <legend>About</legend>
+    <p>
+      Hi, I made this after I learned about the Bluetooth API and was bored riding around Watopia during quarantine
+    </p>
     <p>I'm looking for a neat job</p>
     <p>You can check out the project on <a target="_blank" rel="noopener noreferrer" href="https://github.com/grantrules/cat6">GitHub</a></p>
     {Back}
-  </>)
+  </fieldset>)
 }
 
 function Game() {

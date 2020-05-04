@@ -62,23 +62,21 @@ function DeviceSelector({ type, name }) {
 }
 
 function DeviceSelectScreen({ powerRequiredError, connected }) {
-  //console.log(`connected?`, connected);
   const errClass = powerRequiredError && !connected ? "error" : "";
   return (
-    <>
-      <fieldset>
-        <legend>Devices</legend>
-        <div>
-          <DeviceSelector type="power" className={`powerButton ${errClass}`} name="Power Meter" />
-        </div>
-        <div>
-          <DeviceSelector type="cadence" name="Cadence Sensor" />
-        </div>
-        <div>
-          <DeviceSelector type="heart" name="Heart Rate Sensor" />
-        </div>
-      </fieldset>
-    </>);
+    <fieldset>
+      <legend>Devices</legend>
+      <div>
+        <DeviceSelector type="power" className={`powerButton ${errClass}`} name="Power Meter" />
+      </div>
+      <div>
+        <DeviceSelector type="cadence" name="Cadence Sensor" />
+      </div>
+      <div>
+        <DeviceSelector type="heart" name="Heart Rate Sensor" />
+      </div>
+    </fieldset>
+  );
 }
 
 
@@ -114,9 +112,16 @@ function PlayerDetailScreen() {
     <>
       <fieldset className="player">
         <legend>Player</legend>
-        <PlayerInput name="name" title="Player Name" Input={<input type="text" name="playerName" maxLength="16" value={name} onChange={handleChange('playerName')} />} />
-
-        <PlayerInput name="name" title="Player Weight" Input={<WeightConversion name="weight" weightObj={weightObj} update={update} />} />
+        <PlayerInput
+          name="name"
+          title="Player Name"
+          Input={<input type="text" name="playerName" maxLength="16" value={name} onChange={handleChange('playerName')} />}
+        />
+        <PlayerInput
+          name="weight"
+          title="Player Weight"
+          Input={<WeightConversion name="weight" weightObj={weightObj} update={update} />}
+        />
       </fieldset>
     </>);
 }
@@ -128,7 +133,11 @@ function DeviceStatus({ type }) {
   const connected = store.use(() => store.get(connectedField));
 
   return (<>
-    <div className={`${type}-device device-${connected ? 'connected' : 'unconnected'}`}>{name} <span className={`${type}-icon`}></span>{connected && <><DeviceData type={type} /> {unit}</>}</div>
+    <div className={`${type}-device device-${connected ? 'connected' : 'unconnected'}`}>
+      {name}
+      <span className={`${type}-icon`}></span>
+      {connected && <><DeviceData type={type} /> {unit}</>}
+    </div>
   </>)
 }
 

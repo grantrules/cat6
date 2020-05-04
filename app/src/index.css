@@ -9,13 +9,16 @@
   --dark-blue: rgb(11,52,127);
   --dark-transparent-background: rgba(10, 10, 10, 0.932)
 }
-
+@media screen and (min-height: 550px) {
+  #root{ 
+    height: 100%;
+    justify-content: center;
+  }
+}
 #root {
   display: flex;
-  height: 100%;
   width: 100%;
   align-items: center;
-  justify-content: center;
 }
 html, body { width: 100%; height: 100%; }
 

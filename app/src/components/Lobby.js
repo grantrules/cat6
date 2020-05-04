@@ -34,7 +34,7 @@ function JoinGame({ join, setLobbyState, error }) {
 
   return (<>
     <h1>Enter the game code:</h1>
-    <RoomCode join={join} back={<button onClick={() => setLobbyState('start')}>Back</button>} />
+    <RoomCode join={join} back={<BackBtn onClick={() => setLobbyState('start')} />} />
     {error && <div className="error">{error}</div>}
 
   </>)

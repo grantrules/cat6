@@ -3,7 +3,6 @@ import Ctx from '../Ctx';
 import WeightConversion from '../components/WeightConversion';
 import { connect, devices, addToArray } from '../utils/bluetooth';
 import DeviceData from './DeviceData';
-import { joinedRoom } from '../utils/game';
 
 
 
@@ -40,13 +39,13 @@ function DeviceSelector({ type, name }) {
   const store = React.useContext(Ctx);
   const connected = store.use(() => store.get(connectedField));
   const data = store.use(() => store.get(`${type}Data`));
-  // const gameRoom = store.use(() => store.get('gameRoom'));
+  const gameRoom = store.use(() => store.get('gameRoom'));
 
   const setConnected = (value) => store.set(connectedField, value);
   const setData = (value) => {
     const newData = addToArray(data, value);
-    if (joinedRoom) {
-      joinedRoom.send(type, value);
+    if (gameRoom) {
+      gameRoom.send(type, value);
     }
     store.set(`${type}Data`, newData);
   };

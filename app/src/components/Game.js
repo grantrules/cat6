@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import Logo from './components/Logo';
-import { Lobby } from './components/Lobby';
-import './Game.scss';
-import { Details, DeviceStatuses } from './components/Details';
-import { NextBtn, BackBtn } from './components/Buttons';
+import Logo from './Logo';
+import { Lobby } from './Lobby';
+import { Details, DeviceStatuses } from './Details';
+import { NextBtn, BackBtn } from './Buttons';
 
 function Game() {
 

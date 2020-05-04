@@ -1,5 +1,4 @@
 import React from 'react';
-import './Logo.scss';
 
 function Cat6Logo() {
   return (<Logo className="logo color-text-flow" text="cat6"/>)

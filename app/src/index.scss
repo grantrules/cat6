@@ -1,3 +1,23 @@
+$base-color: #c6538c;
+$default-colors: ("shadow": #333);
+$color-white: white;
+$border-size: 2px;
+$cursor-click-url: "";
+@import "../node_modules/nes.css/scss/utilities/icon-mixin.scss";
+@import "../node_modules/nes.css/scss/utilities/visually-hidden.scss";
+@import "../node_modules/nes.css/scss/utilities/fill-gaps.scss";
+@import "../node_modules/nes.css/scss/utilities/animations.scss";
+@import "./scss/mixins/nes-radio.scss";
+@import "./scss/mixins/show-icon.scss";
+
+
+@import "./components/Logo.scss";
+@import "./components/Room.scss";
+@import "./components/Room.scss";
+@import "./Game.scss";
+@import "./App.scss";
+
+
 :root {
   --xdisabled: #012c03;
   --xxdisabled: rgb(25, 5, 61);

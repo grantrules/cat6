@@ -1,5 +1,15 @@
 .logo { font-size: xxx-large; }
 
+.roomchoice {
+  display: flex;
+  flex-wrap: row wrap;
+  
+}
+.roomchoice > fieldset {
+  flex-basis: 50%;
+
+}
+
 .color-text-flow span,
 .color-text-flow-hover:hover span {
   -webkit-animation-name: color-text-flow-keys;

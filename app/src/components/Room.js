@@ -32,7 +32,7 @@ function InGameLobby({ Back }) {
   }
 
   const myState = gamePlayers[gameRoom.sessionId];
-  const { ready } = myState;
+  const { ready } = myState || {};
 
   const readyClick = () => {
     gameRoom.send("ready", !ready);

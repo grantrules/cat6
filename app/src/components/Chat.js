@@ -1,18 +1,21 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { joinedRoom } from '../utils/game';
 import Ctx from '../Ctx';
 
 function ChatBuffer() {
   const store = useContext(Ctx);
+  const gameRoom = store.use(() => store.get("gameRoom"));
+
   const chat = store.use(() => store.get("gameChat"));
 
   useEffect(() => {
-    if (joinedRoom) {
-      joinedRoom.onMessage('chat',
+    if (gameRoom) {
+      gameRoom.onMessage('chat',
         (message) => store.set('gameChat', [...chat, message])
       );
     }
+    return () => store.set('gameChat', []);
   }, [store, chat]);
+
 
   return (<>
     {chat.map(
@@ -33,10 +36,13 @@ function ChatTextInput({ value, onChange }) {
 
 function ChatInput() {
   const [message, setMessage] = useState('');
+  
+  const store = useContext(Ctx);
+  const gameRoom = store.use(() => store.get("gameRoom"));
 
   const send = () => {
-    if (joinedRoom && message) {
-      joinedRoom.send('chat', message);
+    if (gameRoom && message) {
+      gameRoom.send('chat', message);
       setMessage('');
     }
   }

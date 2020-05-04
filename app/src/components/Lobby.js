@@ -14,32 +14,33 @@ function RoomCode({ join, back }) {
     <>
       <div><input type="text" name="roomCode" value={value} onChange={updateValue} size="4" className="large-input" /></div>
       <button onClick={() => join(value)}>Enter</button>
-      {back}
     </>
   )
 }
 
-function StartGame({ name, hostGame, joinGame, Back }) {
+function StartGame({ name, hostGame, joinRoom, error, Back }) {
   return (<>
     <h2>Welcome {name}</h2>
-    <ul>
-      <li><button onClick={hostGame}>Host Game</button></li>
-      <li><button onClick={joinGame}>Join Game</button></li>
-      <li>{Back}</li>
-    </ul>
+    <div className="roomchoice">
+      <fieldset>
+        <h3>
+          Start a game with 4 players
+        </h3>
+        <button onClick={hostGame}>Host Game</button>
+      </fieldset>
+      <fieldset>
+        <h3>
+          Enter the game code:
+        </h3>
+        <RoomCode join={join} />
+        {error && <div className="error">{error}</div>}
+      </fieldset>
+    </div>
+
+    <div>{Back}</div>
   </>)
 }
 
-function JoinGame({ join, setLobbyState, error }) {
-
-  return (<>
-    <h1>Enter the game code:</h1>
-    <RoomCode join={join} back={<BackBtn onClick={() => setLobbyState('start')} />} />
-    {error && <div className="error">{error}</div>}
-
-  </>)
-
-}
 
 export function Lobby({ Back }) {
 
@@ -55,6 +56,7 @@ export function Lobby({ Back }) {
   const connected = client !== null;
   const inRoom = gameRoom !== null;
 
+
   const [lobbyState, setLobbyState] = useState('start');
 
   const onStateChange = (state) => {
@@ -66,13 +68,13 @@ export function Lobby({ Back }) {
   }
 
   const joinRoom = (room) => {
-    join(room, playerName, playerWeight.weight, onStateChange, onMessage).then(room => store.set('gameRoom', room)).catch((err) =>
+    console.log(playerWeight.weight);
+    join(room, playerName, Number(playerWeight.weight), onStateChange, onMessage).then(room => store.set('gameRoom', room)).catch((err) =>
       setError(err.message)
     )
   }
 
-  const joinGame = () => setLobbyState('join');
-  const hostGame = () => host(playerName, playerWeight.weight, onStateChange, onMessage).then(room => store.set('gameRoom', room))
+  const hostGame = () => host(playerName, Number(playerWeight.weight), onStateChange, onMessage).then(room => store.set('gameRoom', room))
 
 
   return (<>
@@ -86,14 +88,12 @@ export function Lobby({ Back }) {
     {connected && !inRoom &&
       <>
         {lobbyState === 'start' &&
-          <StartGame name={playerName} hostGame={hostGame} joinGame={joinGame} Back={Back}/>}
+          <StartGame name={playerName} hostGame={hostGame} joinRoom={joinRoom} Back={Back} />}
 
-        {lobbyState === 'join' &&
-          <JoinGame setLobbyState={setLobbyState} join={joinRoom} error={error} Back={<BackBtn onClick={()=>setLobbyState('start')}/>}/>}
       </>
     }
 
-    {inRoom && <Room Back={Back} />}
+    {inRoom && <Room Back={<BackBtn onClick={()=>{gameRoom.leave();store.set("gameRoom", null)}}/>} />}
 
   </>
   )

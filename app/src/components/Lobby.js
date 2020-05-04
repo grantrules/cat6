@@ -4,7 +4,7 @@ import Ctx from '../Ctx';
 import Room from './Room';
 import { BackBtn } from './Buttons';
 
-function RoomCode({ join, back }) {
+function RoomCode({ joinRoom, back }) {
 
   const [value, setValue] = useState('');
 
@@ -13,7 +13,7 @@ function RoomCode({ join, back }) {
   return (
     <>
       <div><input type="text" name="roomCode" value={value} onChange={updateValue} size="4" className="large-input" /></div>
-      <button onClick={() => join(value).catch(err=>console.log(err))}>Enter</button>
+      <button onClick={() => joinRoom(value)}>Enter</button>
     </>
   )
 }
@@ -32,7 +32,7 @@ function StartGame({ name, hostGame, joinRoom, error, Back }) {
         <h3>
           Enter the game code:
         </h3>
-        <RoomCode join={joinRoom} />
+        <RoomCode joinRoom={joinRoom} />
         {error && <div className="error">{error}</div>}
       </fieldset>
     </div>
@@ -57,7 +57,7 @@ export function Lobby({ Back }) {
   const inRoom = gameRoom !== null;
 
 
-  const [lobbyState, setLobbyState] = useState('start');
+  //const [lobbyState, setLobbyState] = useState('start');
 
   const onStateChange = (state) => {
     store.set("gameState", state);
@@ -68,9 +68,9 @@ export function Lobby({ Back }) {
   }
 
   const joinRoom = (roomId) => join(roomId, playerName, Number(playerWeight.weight), onStateChange, onMessage)
-      .then(room =>store.set('gameRoom', room))
-      .catch(e =>setError(e.message))
-  
+    .then(room => store.set('gameRoom', room))
+    .catch(e => setError(e.message))
+
 
   const hostGame = () => host(playerName, Number(playerWeight.weight), onStateChange, onMessage).then(room => store.set('gameRoom', room))
 
@@ -84,12 +84,8 @@ export function Lobby({ Back }) {
     }
 
     {connected && !inRoom &&
-      <>
-        {lobbyState === 'start' &&
-          <StartGame name={playerName} hostGame={hostGame} joinRoom={joinRoom} error={error} Back={Back} />}
+      <StartGame name={playerName} hostGame={hostGame} joinRoom={joinRoom} error={error} Back={Back} />}
 
-      </>
-    }
 
     {inRoom && <Room Back={<BackBtn onClick={() => { gameRoom.leave(); store.set("gameRoom", null) }} />} />}
 

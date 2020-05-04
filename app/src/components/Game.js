@@ -2,14 +2,24 @@ import React, { useState } from 'react';
 import Logo from './Logo';
 import { Lobby } from './Lobby';
 import { Details, DeviceStatuses } from './Details';
-import { NextBtn, BackBtn } from './Buttons';
+import { NextBtn, BackBtn, Button } from './Buttons';
 
 function NoBluetooth() {
   return (<>
     <h1>Sorry, you gotta use Chrome</h1>
-    <p>Or any other browser with the Web Bluetooth API</p>
+    <p>Or any other browser with the Web Bluetooth API. Apparently Safari, Opera, and Edge do but I don't use any of those so who knows.</p>
   </>
   )
+}
+
+function About({ Back }) {
+  return (<><p>
+    Hi, I made this after I learned about the Bluetooth API and was bored riding around Watopia during quarantine
+</p>
+    <p>I'm looking for a neat job</p>
+    <p>You can check out the project on <a target="_blank" rel="noopener noreferrer" href="https://github.com/grantrules/cat6">GitHub</a></p>
+    {Back}
+  </>)
 }
 
 function Game() {
@@ -29,12 +39,19 @@ function Game() {
         {hasBluetooth ?
           <>
             {isGameState('details') &&
-              <Details Next={(<NextBtn onClick={() => setGameState("lobby")} />)} />
+              <Details Next={(<>
+                <NextBtn onClick={() => setGameState("lobby")} />
+                <Button txt="About" onClick={() => setGameState("about")} />
+              </>)} />
 
             }
 
             {isGameState('lobby') &&
               <Lobby Back={(<BackBtn onClick={() => setGameState('details')} />)} />
+            }
+
+            {isGameState('about') &&
+              <About Back={(<BackBtn onClick={() => setGameState('details')} />)} />
             }
           </>
           :

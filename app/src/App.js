@@ -2,7 +2,6 @@ import React from "react";
 import Game from "./components/Game";
 import Ctx from './Ctx';
 
-/* eslint react-hooks/rules-of-hooks: "off" */
 
 function App() {
   const [store] = React.useState(() => {
@@ -41,6 +40,8 @@ function App() {
     </main>
   );
 }
+
+/* eslint-disable react-hooks/rules-of-hooks */
 
 /// A single-type event emitter (.on(handler) instead of .on(eventName, handler))
 class EventType {

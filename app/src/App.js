@@ -2,6 +2,8 @@ import React from "react";
 import Game from "./components/Game";
 import Ctx from './Ctx';
 
+/* eslint react-hooks/rules-of-hooks: "off" */
+
 function App() {
   const [store] = React.useState(() => {
     const s = new Store();
